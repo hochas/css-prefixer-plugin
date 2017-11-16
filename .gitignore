@@ -3,6 +3,7 @@
 # general
 .*
 !.gitignore
+!.npmrc
 
 # compiled output
 /dist/site
