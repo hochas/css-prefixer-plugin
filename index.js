@@ -27,15 +27,20 @@ var parseCSS = function(str, prefix){
 	}
 	
 	// take all 1 by 1 and replace them
-	for(var i=0; i< ast.stylesheet.rules.length; i++){
+	for(var i = 0; i< ast.stylesheet.rules.length; i++){
 
 		let rule = ast.stylesheet.rules[i];
 
 		// JKARV: Fix for @media types
 		if (rule.type === 'media') {
-			for (var j=0; j < rule.rules.length; j++) {
-				for (var k=0; k < rule.rules[j].selectors.length; k++) {
+			for (var j = 0; j < rule.rules.length; j++) {
+				for (var k = 0; k < rule.rules[j].selectors.length; k++) {
 					let selector = rule.rules[j].selectors[k];
+
+					if(!selector || !selector.length || selector.indexOf('.') === -1){
+						continue;
+					}
+
 					let prefixedSelector = selector.split('.').join('.' + prefix);
 					ast.stylesheet.rules[i].rules[j].selectors[k] = prefixedSelector;
 				}
@@ -49,12 +54,12 @@ var parseCSS = function(str, prefix){
 		for(var j=0; j< rule.selectors.length; j++){
 			var selector = rule.selectors[j]; 
 			
-			if(!selector || !selector.length || selector.indexOf('.')===-1){
+			if(!selector || !selector.length || selector.indexOf('.') === -1){
 				continue;
 			}
 			
 			// apply prefixes
-			ast.stylesheet.rules[i].selectors[j] = selector.split('.').join('.'+prefix);
+			ast.stylesheet.rules[i].selectors[j] = selector.split('.').join('.' + prefix);
 		}
 	}
 
