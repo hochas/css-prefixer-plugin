@@ -2,15 +2,18 @@ var qs = require('querystring');
 var html = require('cheerio');
 var css = require('css');
 
-const defaultPrefix = 'sjv-';
+var defaultPrefix = 'sjv-';
 
 var warn = function(msg){
-	return console.warn('[css-class-prefix-loader] Warning: '+msg);
+	return console.warn('[css-class-prefix-loader] Warning: ' + msg);
 }
 
-///////////
-// parse css source
-//////////////
+/**
+ * Prefixes css classes.
+ * 
+ * @param {*} str CSS string
+ * @param {*} prefix prefix to add
+ */
 var parseCSS = function(str, prefix){
 	var ast = css.parse(str, {silent:true});
 	
@@ -29,19 +32,19 @@ var parseCSS = function(str, prefix){
 	// take all 1 by 1 and replace them
 	for(var i = 0; i< ast.stylesheet.rules.length; i++){
 
-		let rule = ast.stylesheet.rules[i];
+		var rule = ast.stylesheet.rules[i];
 
 		// JKARV: Fix for @media types
 		if (rule.type === 'media') {
 			for (var j = 0; j < rule.rules.length; j++) {
 				for (var k = 0; k < rule.rules[j].selectors.length; k++) {
-					let selector = rule.rules[j].selectors[k];
+					var selector = rule.rules[j].selectors[k];
 
 					if(!selector || !selector.length || selector.indexOf('.') === -1){
 						continue;
 					}
 
-					let prefixedSelector = selector.split('.').join('.' + prefix);
+					var prefixedSelector = selector.split('.').join('.' + prefix);
 					ast.stylesheet.rules[i].rules[j].selectors[k] = prefixedSelector;
 				}
 			}
@@ -66,7 +69,12 @@ var parseCSS = function(str, prefix){
 	return css.stringify(ast, {});
 }
 
-module.exports = function(str, map){
+/**
+ * Main entry point
+ * 
+ * @param {*} str Stylesheet as a string
+ */
+module.exports = function(str){
 	// mark as cacheable for webpack
 	this.cacheable(); 
 
