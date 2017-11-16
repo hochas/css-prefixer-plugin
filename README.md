@@ -1,3 +1,6 @@
+Klonad från [css-class-prefixer-loader](https://www.npmjs.com/package/css-class-prefixer-loader).  
+Källkoden finns inte på git, men har fixat ett antal buggar i detta repo.
+
 # CSS Class Prefixer Loader
 
 CSS Class Prefixer Loader plugin for webpack. 
