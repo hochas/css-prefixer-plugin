@@ -10,9 +10,8 @@ Automatically adds prefixes to CSS classes, for webpack.
 ### Usage
 
 ```js
-
-require('!css-class-prefixer?mode=css&prefix=my-!myfile.css');
-require('!css-class-prefixer?mode=html&prefix=my-!myfile.css');
+require('!css-class-prefixer-loader?mode=css&prefix=sjv-!myfile.css');
+require('!css-class-prefixer-loader?mode=html&prefix=sjv-!myfile.css');
 ```
 
 ### Usage in webpack config
@@ -21,8 +20,8 @@ require('!css-class-prefixer?mode=html&prefix=my-!myfile.css');
 {
 	module: {
 		loaders: [
-			{ test: /\.css$/, loader: "css-class-prefixer?mode=css&prefix=my-" }, 
-			{ test: /\.html$/, loader: "css-class-prefixer?mode=html&prefix=my-" }, 
+			{ test: /\.css$/, loader: "css-class-prefixer-loader?mode=css&prefix=sjv-" }, 
+			{ test: /\.html$/, loader: "css-class-prefixer-loader?mode=html&prefix=sjv-" }, 
 		], 
 	}, 
 }
@@ -32,4 +31,3 @@ require('!css-class-prefixer?mode=html&prefix=my-!myfile.css');
 
 - `prefix` - the prefix to use
 - `mode` - either 'css' or 'html'
-

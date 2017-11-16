@@ -2,7 +2,7 @@ var qs = require('querystring');
 var html = require('cheerio');
 var css = require('css');
 
-var defaultPrefix = 'my-';
+const defaultPrefix = 'sjv-';
 
 var warn = function(msg){
 	return console.warn('[css-class-prefix-loader] Warning: '+msg);
@@ -31,15 +31,12 @@ var parseCSS = function(str, prefix){
 
 		let rule = ast.stylesheet.rules[i];
 
-		// console.log('RULE: ' + JSON.stringify(rule) + '\n\n');
-
 		// JKARV: Fix for @media types
 		if (rule.type === 'media') {
 			for (var j=0; j < rule.rules.length; j++) {
 				for (var k=0; k < rule.rules[j].selectors.length; k++) {
 					let selector = rule.rules[j].selectors[k];
 					let prefixedSelector = selector.split('.').join('.' + prefix);
-					console.info(selector + ' ---> ' + prefixedSelector);
 					ast.stylesheet.rules[i].rules[j].selectors[k] = prefixedSelector;
 				}
 			}
@@ -64,28 +61,10 @@ var parseCSS = function(str, prefix){
 	return css.stringify(ast, {});
 }
 
-////////////////
-// parse html source
-/////////////////
-var parseHTML = function(str, prefix, opts){
-	var ast = html.load(str, opts);
-	ast('[class]').each(function(i, elem){
-		var t = ast(this);
-		var classes = t.attr('class');
-		if(!classes.length)
-			return; 
-		t.attr('class', prefix + classes.split(/\s+/).join(' '+prefix));
-	}); 
-	return ast.html();
-}
-
-/////////////////
-// main decision point
-/////////////////
 module.exports = function(str, map){
 	// mark as cacheable for webpack
 	this.cacheable(); 
-	
+
 	// read prefix
 	var prefix = defaultPrefix;
 	var mode = null;
@@ -104,11 +83,8 @@ module.exports = function(str, map){
 	// parse according to mode
 	var result = str;
 	switch(mode){
-		case 'css': 
+		case 'css':
 			result = parseCSS(str, prefix); 
-			break;
-		case 'html':
-			result = parseHTML(str, prefix, query); 
 			break;
 		default:
 			warn('invalid input source parsing mode specified');
@@ -117,5 +93,4 @@ module.exports = function(str, map){
 	
 	// done
 	return result;
-	
 }

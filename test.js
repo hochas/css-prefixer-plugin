@@ -1,9 +1,20 @@
 
 var mk = require('./index').bind({
 	cacheable: function(){}, 
-	query: '?prefix=my-',
-	mode: 'html',
+	query: '?mode=css&prefix=sjv-'
 });
 
-console.log( mk(" <div class='Graphics EMFooter'> Hello <b class='verybold'>World</b>! </div>  ") ); 
+console.log(mk(
+	`.o-container {
+		margin-right: auto;
+		margin-left: auto;
+	}`
+)); 
 
+console.log(mk(
+	`@media (min-width: 576px) {
+		.o-container {
+			max-width: 720px;
+		}
+	}`
+));
