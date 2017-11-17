@@ -1,100 +1,25 @@
-
-var sjvPrefixAndPrefixedElements = require('./index').bind({
-	cacheable: function(){}, 
-	query: '?mode=css&elements=true&prefix=sjv-'
-});
-
-console.log('Prefixing elements and classes with sjv:\n');
-
-console.log('Without media query:\n')
-console.log(sjvPrefixAndPrefixedElements(
-	`.o-container {
-		margin-right: auto;
-		margin-left: auto;
-	}
-
-	body {
-		background: #FFF;
-	}
-	\n`
-)); 
-
-console.log('With media query:\n')
-console.log(sjvPrefixAndPrefixedElements(
-	`@media (min-width: 576px) {
-		.o-container {
-			max-width: 720px;
-		}
-
-		body {
-			background: #FFF;
-		}
-	}
-	\n`
-));
-
-// ==================================================================
-
-var sjvPrefix = require('./index').bind({
-	cacheable: function(){}, 
-	query: '?mode=css&prefix=sjv-'
-});
-
-
-console.log('Prefixing classes with sjv:\n');
-
-console.log('Without media query:\n')
-console.log(sjvPrefix(
-	`.o-container {
-		margin-right: auto;
-		margin-left: auto;
-	}
-
-	body {
-		background: #FFF;
-	}
-	\n`
-)); 
-
-console.log('With media query:\n')
-console.log(sjvPrefix(
-	`@media (min-width: 576px) {
-		.o-container {
-			max-width: 720px;
-		}
-
-		body {
-			background: #FFF;
-		}
-	}
-	\n`
-));
-
-// ==================================================================
-
-var sjvDefaultPrefix = require('./index').bind({
+let cases = [];
+cases.push(require('./index').bind({
 	cacheable: function(){}, 
 	query: '?mode=css'
-});
+}));
 
+cases.push(require('./index').bind({
+	cacheable: function(){}, 
+	query: '?mode=css&elements=true&prefix=sjv-'
+}));
 
-console.log('Prefixing classes with sjv using default prefix:\n');
+cases.push(require('./index').bind({
+	cacheable: function(){}, 
+	query: '?mode=css&prefix=my-'
+}));
 
-console.log('Without media query:\n')
-console.log(sjvDefaultPrefix(
-	`.o-container {
-		margin-right: auto;
-		margin-left: auto;
-	}
+cases.push(require('./index').bind({
+	cacheable: function(){}, 
+	query: '?mode=css&prefix=my-&elements=true'
+}));
 
-	body {
-		background: #FFF;
-	}
-	\n`
-)); 
-
-console.log('With media query:\n')
-console.log(sjvDefaultPrefix(
+let mediaQueryCss =
 	`@media (min-width: 576px) {
 		.o-container {
 			max-width: 720px;
@@ -103,6 +28,22 @@ console.log(sjvDefaultPrefix(
 		body {
 			background: #FFF;
 		}
+	}`;
+
+let css =
+	`.o-container {
+		margin-right: auto;
+		margin-left: auto;
 	}
-	\n`
-));
+
+	body {
+		background: #FFF;
+	}`;
+
+
+for (var i = 0; i < cases.length; i++) {
+	console.log('Running test case ' + (i + 1) + ':\n');
+	console.log(cases[i](mediaQueryCss));
+	console.log(cases[i](css));
+	console.log('\n\n');
+}
