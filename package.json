@@ -1,10 +1,10 @@
 {
-  "name": "@sjv/css-class-prefixer-loader",
+  "name": "@sjv/css-prefixer-loader",
   "version": "1.0.0",
-  "description": "CSS Class Prefixer Loader plugin for webpack.",
+  "description": "CSS Prefixer Loader for webpack.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "author": "JKARV",
   "license": "ISC",

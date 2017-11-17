@@ -1,7 +1,7 @@
 Klonad från [css-class-prefixer-loader](https://www.npmjs.com/package/css-class-prefixer-loader).  
 Källkoden finns inte på GitHub, men har fixat ett antal buggar i detta repo.
 
-# CSS Class Prefixer Loader
+# CSS Prefixer Loader
 
 CSS Class Prefixer Loader plugin for webpack. 
 
@@ -37,4 +37,4 @@ require('!css-class-prefixer-loader?mode=css&prefix=sjv-!myfile.css');
 
 See test cases in `test.js`. No assertions are made, validate the output manually.
 
-Just run `node test.js` to see the ouput.
+Just run `node test.js` or `npm test` to see the ouput.
