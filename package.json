@@ -1,6 +1,6 @@
 {
   "name": "@sjv/css-prefixer-loader",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "CSS Prefixer Loader for webpack.",
   "main": "index.js",
   "publishConfig": {
