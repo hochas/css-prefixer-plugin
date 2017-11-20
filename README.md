@@ -1,40 +1,32 @@
-Klonad från [css-class-prefixer-loader](https://www.npmjs.com/package/css-class-prefixer-loader).  
-Källkoden finns inte på GitHub, men har fixat ett antal buggar i detta repo.
-
 # CSS Prefixer Loader
 
-CSS Class Prefixer Loader plugin for webpack. 
+CSS Class Prefixer Plugin for webpack. 
 
 Automatically adds prefixes to CSS classes, for webpack. 
 
 ## Usage
 
 ```js
-require('!css-class-prefixer-loader?mode=css&prefix=sjv-!myfile.css');
-```
+const PrefixCssPlugin = require('@sjv/css-prefixer-plugin');
+const prefixCss = new PrefixCssPlugin({
+    filePatterns: [
+        /\.css$/
+    ],
+    cssPrefix: 'sjv-',
+    shouldPrefixElements: true
+});
 
-### Usage in webpack config
-
-```js
-{
-	module: {
-		loaders: [
-			{ test: /\.css$/, loader: "css-class-prefixer-loader?mode=css&prefix=sjv-" }
-		], 
-	}, 
-}
+plugins: [
+	prefixCss,
+	...
+	]
 ```
 
 ### Config options
 
-| option | type | values | usage |
-| -------- | -------- | -------- | -------- |
-| `prefix` | `string` | Default: `sjv-` | Prefix to add to classes |
-| `mode`   | `string` | `css` | Replace mode |
-| `elements` | `boolean`| `true` <br> `false` <br>  Default: `false` | If styled elements should have the prefix appended. For instance, given prefix `sjv-`, `body` would become `body.sjv`. The dash is automatically removed | 
-
-### Testing
-
-See test cases in `test.js`. No assertions are made, validate the output manually.
-
-Just run `node test.js` or `npm test` to see the ouput.
+| option | type | values | required | usage |
+| -------- | -------- | -------- | -------- | -------- |
+| `filePatterns` | `array` | | `true` | Array of regular expressions |
+| `cssPrefix`   | `string` | | `true` |  Prefix to add to classes |
+| `shouldPrefixElements` | `boolean`| `false` |`true` <br> `false` <br>  Default: `false` | If styled elements should have the prefix appended. For instance, given prefix `sjv-`, `body` would become `body.sjv`. The dash is automatically removed | 
+| `fileSuffix` | `string` | Default: `-prefixed` | `true` | With default setting, file name `sjv-main.css` would become `sjv-main-prefixed.css` |

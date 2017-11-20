@@ -1,0 +1,21 @@
+{
+  "name": "@sjv/css-prefixer-plugin",
+  "version": "0.0.1",
+  "description": "Prefixes css",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "http://vl-nexus01:8080/repository/sjv-npm-releases/"
+  },
+  "scripts": {
+    "build": "babel src -d dist"
+  },
+  "author": "JKARV",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  },
+  "dependencies": {
+    "css": "^2.2.1"
+  }
+}
