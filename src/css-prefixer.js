@@ -1,9 +1,9 @@
-var qs = require("querystring");
-var html = require("cheerio");
-var css = require("css");
+var qs = require('querystring');
+var html = require('cheerio');
+var css = require('css');
 
 var warn = function(msg) {
-  return console.warn("[css-class-prefix-loader] Warning: " + msg);
+  return console.warn('[css-class-prefix-plugin] Warning: ' + msg);
 };
 
 /**
@@ -17,8 +17,8 @@ export default function(str, prefix, shouldPrefixElements) {
   var ast = css.parse(str, { silent: true });
 
   // don't care if it's not a valid result
-  if (!ast || typeof ast != "object" || ast === null) {
-    warn("CSS parser returned nothing for input source");
+  if (!ast || typeof ast != 'object' || ast === null) {
+    warn('CSS parser returned nothing for input source');
     return str;
   }
 
@@ -28,7 +28,7 @@ export default function(str, prefix, shouldPrefixElements) {
     !ast.stylesheet.rules ||
     !ast.stylesheet.rules.length
   ) {
-    warn("CSS parser did not parse input source, or no CSS rules were found");
+    warn('CSS parser did not parse input source, or no CSS rules were found');
     return str;
   }
 
@@ -101,7 +101,7 @@ var setSelector = function(selector, prefix, shouldPrefixElements) {
     modifiedSelector = applyPrefixToSelector(selector, prefix);
   }
   if (!isClass(selector) && shouldPrefixElements) {
-    modifiedSelector = selector + "." + prefix.replace("-", "");
+    modifiedSelector = selector + '.' + prefix.replace('-', '');
   }
   return modifiedSelector;
 };
@@ -111,9 +111,9 @@ var isNull = function(string) {
 };
 
 var isClass = function(selector) {
-  return selector.indexOf(".") > -1;
+  return selector.indexOf('.') > -1;
 };
 
 var applyPrefixToSelector = function(selector, prefix) {
-  return selector.split(".").join("." + prefix);
+  return selector.split('.').join('.' + prefix);
 };
