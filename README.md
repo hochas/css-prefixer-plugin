@@ -28,5 +28,5 @@ plugins: [
 | -------- | -------- | -------- | -------- | -------- |
 | `filePatterns` | `array` | | `true` | Array of regular expressions |
 | `cssPrefix`   | `string` | | `true` |  Prefix to add to classes |
-| `shouldPrefixElements` | `boolean`| `false` |`true` <br> `false` <br>  Default: `false` | If styled elements should have the prefix appended. For instance, given prefix `sjv-`, `body` would become `body.sjv`. The dash is automatically removed | 
+| `prefixElements` | `boolean`| `false` |`true` <br> `false` <br>  Default: `false` | If styled elements should have the prefix appended. For instance, given prefix `sjv-`, `body` would become `body.sjv`. The dash is automatically removed | 
 | `fileSuffix` | `string` | Default: `-prefixed` | `true` | With default setting, file name `sjv-main.css` would become `sjv-main-prefixed.css` |
