@@ -1,4 +1,4 @@
-# CSS Prefixer Loader
+# CSS Prefixer Plugin
 
 CSS Class Prefixer Plugin for webpack. 
 
@@ -13,7 +13,7 @@ const prefixCss = new PrefixCssPlugin({
         /\.css$/
     ],
     cssPrefix: 'sjv-',
-    shouldPrefixElements: true
+    prefixElements: true
 });
 
 plugins: [

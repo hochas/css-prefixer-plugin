@@ -12,14 +12,11 @@ let fileSuffix;
 let cssPrefix;
 let shouldPrefixElements;
 
-
-// https://survivejs.com/webpack/extending/plugins/
-// https://github.com/webpack/docs/wiki/plugins
 function PrefixCssPlugin(options) {
   filePatterns = options.filePatterns;
   cssPrefix = options.cssPrefix;
   console.log(options.shouldPrefixElements);
-  shouldPrefixElements = options.shouldPrefixElements ? options.shouldPrefixElements : false;
+  shouldPrefixElements = options.prefixElements ? options.prefixElements : false;
   fileSuffix = options.fileSuffix ? options.fileSuffix : defaultFileSuffix;
 }
 
