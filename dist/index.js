@@ -23,13 +23,10 @@ var fileSuffix = void 0;
 var cssPrefix = void 0;
 var shouldPrefixElements = void 0;
 
-// https://survivejs.com/webpack/extending/plugins/
-// https://github.com/webpack/docs/wiki/plugins
 function PrefixCssPlugin(options) {
   filePatterns = options.filePatterns;
   cssPrefix = options.cssPrefix;
-  console.log(options.shouldPrefixElements);
-  shouldPrefixElements = options.shouldPrefixElements ? options.shouldPrefixElements : false;
+  shouldPrefixElements = options.prefixElements ? options.prefixElements : false;
   fileSuffix = options.fileSuffix ? options.fileSuffix : defaultFileSuffix;
 }
 
@@ -41,7 +38,6 @@ PrefixCssPlugin.prototype.apply = function (compiler) {
       for (var pattern in filePatterns) {
         if (filePatterns[pattern].test(filename)) {
           var content = compilation.assets[filename].source();
-          console.log('Prefix  elemnets: ' + shouldPrefixElements);
           prefixedCssContent = (0, _cssPrefixer2.default)(content, cssPrefix, shouldPrefixElements);
 
           compilation.assets[generateFileName(filename)] = {

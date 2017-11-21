@@ -26,7 +26,7 @@ PrefixCssPlugin.prototype.apply = function(compiler) {
     for (const filename in compilation.assets) {
       for (const pattern in filePatterns) {
         if (filePatterns[pattern].test(filename)) {
-          let content = compilation.assets[filename].source();""
+          let content = compilation.assets[filename].source();
           prefixedCssContent = cssPrefixer(
             content,
             cssPrefix, 
