@@ -15,7 +15,6 @@ let shouldPrefixElements;
 function PrefixCssPlugin(options) {
   filePatterns = options.filePatterns;
   cssPrefix = options.cssPrefix;
-  console.log(options.shouldPrefixElements);
   shouldPrefixElements = options.prefixElements ? options.prefixElements : false;
   fileSuffix = options.fileSuffix ? options.fileSuffix : defaultFileSuffix;
 }
