@@ -47,11 +47,11 @@ exports.default = function (str, prefix, shouldPrefixElements) {
     handleRule(rule, ast, i, prefix, shouldPrefixElements);
   }
 
-  return css.stringify(ast, {});
+  return css.stringify(ast, {
+    compress: true
+  });
 };
 
-var qs = require('querystring');
-var html = require('cheerio');
 var css = require('css');
 
 var warn = function warn(msg) {

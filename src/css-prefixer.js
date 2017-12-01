@@ -1,5 +1,3 @@
-var qs = require('querystring');
-var html = require('cheerio');
 var css = require('css');
 
 var warn = function(msg) {
