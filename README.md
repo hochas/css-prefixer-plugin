@@ -29,4 +29,4 @@ plugins: [
 | `filePatterns` | `array` | | `true` | Array of regular expressions |
 | `cssPrefix`   | `string` | | `true` |  Prefix to add to classes |
 | `prefixElements` | `boolean`| `true` <br> `false` <br>  Default: `false` | `false` | If styled elements should have the prefix appended. For instance, given prefix `sjv-`, `body` would become `body.sjv`. The dash is automatically removed | 
-| `fileSuffix` | `string` | Default: `-prefixed` | `true` | With default setting, file name `sjv-main.css` would become `sjv-main-prefixed.css` |
+| `fileSuffix` | `string` | Default: `-prefixed` | `false` | With default setting, file name `sjv-main.css` would become `sjv-main-prefixed.css` |
