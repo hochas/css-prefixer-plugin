@@ -58,7 +58,9 @@ export default function(str, prefix, shouldPrefixElements) {
     handleRule(rule, ast, i, prefix, shouldPrefixElements);
   }
 
-  return css.stringify(ast, {});
+  return css.stringify(ast, {
+    compress: true
+  });
 };
 
 var handleMediaQueryRule = function(rule, ast, i, prefix, shouldPrefixElements) {
