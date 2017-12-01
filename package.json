@@ -2,7 +2,7 @@
   "name": "@sjv/css-prefixer-plugin",
   "version": "0.0.2",
   "description": "Prefixes css",
-  "main": "index.js",
+  "main": "dist/index.js",
   "publishConfig": {
     "registry": "http://vl-nexus01:8080/repository/sjv-npm-releases/"
   },

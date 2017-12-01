@@ -66,7 +66,7 @@ var handleMediaQueryRule = function(rule, ast, i, prefix, shouldPrefixElements) 
     for (var k = 0; k < rule.rules[j].selectors.length; k++) {
       var selector = rule.rules[j].selectors[k];
 
-      if (isNull(selector)) {
+      if (isNull(selector) || isPseudoSelector(selector)) {
         continue;
       }
 
@@ -83,7 +83,7 @@ var handleRule = function(rule, ast, i, prefix, shouldPrefixElements) {
   for (var j = 0; j < rule.selectors.length; j++) {
     var selector = rule.selectors[j];
 
-    if (isNull(selector)) {
+    if (isNull(selector) || isPseudoSelector(selector)) {
       continue;
     }
 
@@ -109,6 +109,10 @@ var setSelector = function(selector, prefix, shouldPrefixElements) {
 var isNull = function(string) {
   return !string || !string.length;
 };
+
+var isPseudoSelector = function (selector) {
+  return selector.indexOf(':') > -1;
+}
 
 var isClass = function(selector) {
   return selector.indexOf('.') > -1;
