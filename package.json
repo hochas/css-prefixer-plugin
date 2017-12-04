@@ -3,9 +3,6 @@
   "version": "0.0.4",
   "description": "Prefixes css",
   "main": "dist/index.js",
-  "publishConfig": {
-    "registry": "http://vl-nexus01:8080/repository/sjv-npm-releases/"
-  },
   "scripts": {
     "build": "babel src -d dist"
   },
