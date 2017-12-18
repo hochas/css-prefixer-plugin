@@ -1,6 +1,6 @@
 {
   "name": "@sjv/css-prefixer-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Prefixes css",
   "main": "dist/index.js",
   "scripts": {

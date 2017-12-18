@@ -48,7 +48,7 @@ exports.default = function (str, prefix, shouldPrefixElements) {
   }
 
   return css.stringify(ast, {
-    compress: true
+    compress: false
   });
 };
 
@@ -98,13 +98,19 @@ var handleRule = function handleRule(rule, ast, i, prefix, shouldPrefixElements)
 };
 
 var setSelector = function setSelector(selector, prefix, shouldPrefixElements) {
-  var modifiedSelector = null;
-  if (isClass(selector)) {
-    modifiedSelector = applyPrefixToSelector(selector, prefix);
+  var modifiedSelector = '';
+  var selectorParts = selector.split(' ');
+  for (var part in selectorParts) {
+    var currentSelector = selectorParts[part];
+    if (isClass(currentSelector)) {
+      modifiedSelector += applyPrefixToSelector(currentSelector, prefix);
+    }
+    if (!isClass(currentSelector) && shouldPrefixElements) {
+      var modifiedPart = currentSelector + '.' + prefix.replace('-', '');
+      modifiedSelector += ' ' + modifiedPart;
+    }
   }
-  if (!isClass(selector) && shouldPrefixElements) {
-    modifiedSelector = selector + '.' + prefix.replace('-', '');
-  }
+
   return modifiedSelector;
 };
 

@@ -57,7 +57,7 @@ export default function(str, prefix, shouldPrefixElements) {
   }
 
   return css.stringify(ast, {
-    compress: true
+    compress: false
   });
 };
 
@@ -66,7 +66,7 @@ var handleMediaQueryRule = function(rule, ast, i, prefix, shouldPrefixElements) 
     for (var k = 0; k < rule.rules[j].selectors.length; k++) {
       var selector = rule.rules[j].selectors[k];
 
-      if (isNull(selector) || isPseudoSelector(selector)) {
+      if (isNull(selector)) {
         continue;
       }
 
@@ -83,7 +83,7 @@ var handleRule = function(rule, ast, i, prefix, shouldPrefixElements) {
   for (var j = 0; j < rule.selectors.length; j++) {
     var selector = rule.selectors[j];
 
-    if (isNull(selector) || isPseudoSelector(selector)) {
+    if (isNull(selector)) {
       continue;
     }
 
@@ -95,15 +95,24 @@ var handleRule = function(rule, ast, i, prefix, shouldPrefixElements) {
   }
 };
 
-var setSelector = function(selector, prefix, shouldPrefixElements) {
-  var modifiedSelector = null;
-  if (isClass(selector)) {
-    modifiedSelector = applyPrefixToSelector(selector, prefix);
-  }
-  if (!isClass(selector) && shouldPrefixElements) {
-    modifiedSelector = selector + '.' + prefix.replace('-', '');
-  }
-  return modifiedSelector;
+var setSelector = function (selector, prefix, shouldPrefixElements) {
+    let modifiedSelector = '';
+    const selectorParts = selector.split(' ');
+    for (let part in selectorParts) {
+      var currentSelector = selectorParts[part];
+      if (isClass(currentSelector)) {
+        modifiedSelector += applyPrefixToSelector(currentSelector, prefix);
+      }
+      if (isClass(currentSelector) && isPseudoSelector(currentSelector)) {
+        modifiedSelector += applyPrefixToSelector(currentSelector, prefix);
+      }
+      if (!isClass(currentSelector) && !isPseudoSelector(currentSelector) && shouldPrefixElements) {
+        var modifiedPart = currentSelector + '.' + prefix.replace('-', '');
+        modifiedSelector += ' ' + modifiedPart;
+      }
+    }
+    
+    return modifiedSelector;
 };
 
 var isNull = function(string) {

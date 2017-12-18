@@ -1,5 +1,3 @@
-**Disclaimer**: Developed for my current employer. Use as is if you want to, I will not maintain this repository.
-
 # CSS Prefixer Plugin
 
 CSS Class Prefixer Plugin for webpack. 
